@@ -1,0 +1,16 @@
+{
+  "name": "my-stories",
+  "version": "1.0.0",
+  "description": "See the stories",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "elm-format": "^0.5.2",
+    "elm-oracle": "^1.1.1",
+    "elm-test": "^0.18.2"
+  }
+}
