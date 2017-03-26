@@ -4,7 +4,7 @@
   "description": "See the stories",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "node_modules/.bin/elm-test"
   },
   "author": "",
   "license": "ISC",
