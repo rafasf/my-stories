@@ -1,6 +1,6 @@
 module Base exposing (..)
 
-import Story exposing (Story)
+import Definitions exposing (Story)
 
 
 type alias Model =

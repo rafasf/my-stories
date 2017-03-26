@@ -3,7 +3,7 @@ module Stories exposing (..)
 import Html exposing (Html, Attribute, text, li, h3, small)
 import Html.Attributes exposing (..)
 import String
-import Story exposing (Story)
+import Definitions exposing (Story)
 import Base exposing (..)
 
 

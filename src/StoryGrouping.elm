@@ -5,7 +5,7 @@ import Html.Attributes exposing (..)
 import Dict exposing (Dict)
 import Dict.Extra exposing (groupBy)
 import String
-import Story exposing (Story)
+import Definitions exposing (Story)
 import Base exposing (..)
 import Stories exposing (..)
 
