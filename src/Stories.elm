@@ -3,23 +3,8 @@ module Stories exposing (..)
 import Html exposing (Html, Attribute, text, li, h3, small)
 import Html.Attributes exposing (..)
 import String
-
-
-type alias Model =
-    { stories : Story
-    }
-
-
-type Msg
-    = Change Model
-
-
-type alias Story =
-    { narrative : String
-    , feature : String
-    , category : String
-    , priority : String
-    }
+import Story exposing (Story)
+import Base exposing (..)
 
 
 toStoryViewOf : Story -> Html Msg

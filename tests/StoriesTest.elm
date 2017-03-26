@@ -4,6 +4,7 @@ import Test exposing (..)
 import Expect
 import Html exposing (Html, Attribute, section, text, div, h1, h2, h3, p, small, ul, li)
 import Html.Attributes exposing (..)
+import Story exposing (Story)
 import Stories exposing (..)
 
 
