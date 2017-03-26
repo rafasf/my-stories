@@ -10,7 +10,23 @@ type alias Model =
 
 model : Model
 model =
-    { stories = []
+    { stories =
+        [ { category = "Cat 1"
+          , feature = "Feat 1"
+          , narrative = "Nar 1"
+          , priority = "Must Have"
+          }
+        , { category = "Cat 1"
+          , feature = "Feat 1"
+          , narrative = "Nar 2"
+          , priority = "Should Have"
+          }
+        , { category = "Cat 2"
+          , feature = "Feat 2"
+          , narrative = "Nar 3"
+          , priority = "Could Have"
+          }
+        ]
     }
 
 
