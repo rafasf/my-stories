@@ -1,0 +1,74 @@
+html, body {
+  font-family: "Open Sans";
+  color: #111;
+}
+
+ul, li, h1, h2, h3 {
+  padding: 0;
+  margin: 0;
+}
+
+ul, li {
+  list-style: none;
+}
+
+.fixed-info {
+  width: 100%;
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  background-color: #fff;
+  justify-content: flex-end;
+}
+
+.cards {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: right;
+}
+
+.card {
+  position: relative;
+  background-color: #7FDBFF;
+  border: 1px solid #805D00;
+  padding: 10px;
+  margin: 5px;
+}
+
+.card-story {
+  width: 380px;
+  height: 100px;
+}
+
+.card-feature {
+  position: absolute;
+  display: block;
+
+  text-transform: uppercase;
+
+  color: #aaa;
+
+  bottom: 3px;
+  right: 3px;
+}
+
+.must-have {
+  background-color: rgb(217, 234, 211);
+  border: 1px solid rgb(90, 107, 84);
+}
+
+.could-have {
+  background-color: rgb(207, 226, 243);
+  border: 1px solid rgb(80, 99, 116);
+}
+
+.nice-to-have {
+  background-color: rgb(239, 239, 239);
+  border: 1px solid rgb(112, 112, 112);
+}
+
+.should-have {
+  background-color: rgb(252, 229, 205);
+  border: 1px solid rgb(125, 102, 78);
+}
+
