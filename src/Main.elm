@@ -1,7 +1,8 @@
 module Main exposing (..)
 
-import Html exposing (Html, Attribute, div, section, ul, li, text)
+import Html exposing (Html, Attribute, button, div, section, ul, li, text)
 import Html.Attributes exposing (..)
+import Html.Events exposing (onClick)
 import Dict exposing (Dict)
 import StoryGrouping exposing (..)
 import Definitions exposing (Story)
@@ -42,7 +43,7 @@ update msg model =
 view : Model -> Html Msg
 view model =
     section []
-        [ ul [] (prioritiesIn model.stories)
+        [ ul [ class "fixed-info cards" ] (prioritiesIn model.stories)
         , div [] (viewBy "feature" model.stories)
         ]
 
@@ -54,15 +55,11 @@ subscriptions model =
 
 prioritiesIn : List Story -> List (Html Msg)
 prioritiesIn stories =
-    let
-        priorities =
-            (List.map
-                .priority
-                model.stories
+    stories
+        |> List.map .priority
+        |> knownCssFor
+        |> Dict.map
+            (\priority cssClass ->
+                li [ class ("card " ++ cssClass) ] [ text priority ]
             )
-    in
-        (Dict.values
-            (Dict.map (\priority cssClass -> li [ class cssClass ] [ text priority ])
-                (knownCssFor priorities)
-            )
-        )
+        |> Dict.values

@@ -11,6 +11,9 @@ allKnownStates =
         , ( "could have", "could-have" )
         , ( "nice to have", "nice-to-have" )
         , ( "won't have", "wont-have" )
+        , ( "in scope", "must-have" )
+        , ( "not in scope", "should-have" )
+        , ( "tbd", "nice-to-have" )
         ]
 
 
@@ -19,7 +22,15 @@ knownCssFor someStates =
     Dict.fromList
         (List.map
             (\state ->
-                ( state, (Maybe.withDefault "unknown" (Dict.get (String.toLower state) allKnownStates)) )
+                ( state, (cssClassFor state) )
             )
             someStates
         )
+
+
+cssClassFor : String -> String
+cssClassFor someState =
+    (Maybe.withDefault
+        "unknown"
+        (Dict.get (String.toLower someState) allKnownStates)
+    )
