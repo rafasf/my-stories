@@ -1,5 +1,6 @@
 module Base exposing (..)
 
+import Http
 import Definitions exposing (Story)
 
 
@@ -31,4 +32,5 @@ model =
 
 
 type Msg
-    = Change Model
+    = FetchStories
+    | StoriesLoaded (Result Http.Error (List Story))

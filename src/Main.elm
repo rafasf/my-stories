@@ -11,14 +11,32 @@ import Base exposing (..)
 
 
 main =
-    Html.beginnerProgram { model = model, view = view, update = update }
+    Html.program
+        { init = init []
+        , view = view
+        , update = update
+        , subscriptions = subscriptions
+        }
 
 
-update : Msg -> Model -> Model
+init : List Story -> ( Model, Cmd Msg )
+init initialStories =
+    ( { stories = [] }
+    , fetchStories
+    )
+
+
+update : Msg -> Model -> ( Model, Cmd Msg )
 update msg model =
     case msg of
-        Change newContent ->
-            { model | stories = newContent.stories }
+        FetchStories ->
+            ( model, fetchStories )
+
+        StoriesLoaded (Ok stories) ->
+            ( { model | stories = stories }, Cmd.none )
+
+        StoriesLoaded (Err _) ->
+            ( model, Cmd.none )
 
 
 view : Model -> Html Msg
@@ -27,6 +45,11 @@ view model =
         [ ul [] (prioritiesIn model.stories)
         , div [] (viewBy "feature" model.stories)
         ]
+
+
+subscriptions : Model -> Sub Msg
+subscriptions model =
+    Sub.none
 
 
 prioritiesIn : List Story -> List (Html Msg)
