@@ -34,7 +34,5 @@ storyDecoder =
             (field "narrative" string)
             (field "feature" string)
             (field "category" string)
-            (field "priority"
-                string
-            )
+            (field "priority" string)
         )

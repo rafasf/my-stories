@@ -6,12 +6,16 @@ import Definitions exposing (Story)
 
 type alias Model =
     { stories : List Story
+    , selectedGrouping : Maybe String
+    , selectedPriority : Maybe String
     }
 
 
 model : Model
 model =
-    { stories =
+    { selectedGrouping = Nothing
+    , selectedPriority = Nothing
+    , stories =
         [ { category = "Cat 1"
           , feature = "Feat 1"
           , narrative = "Nar 1"
@@ -34,3 +38,6 @@ model =
 type Msg
     = FetchStories
     | StoriesLoaded (Result Http.Error (List Story))
+    | SelectGrouping String
+    | ShowAll
+    | SelectPriority String
