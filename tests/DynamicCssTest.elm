@@ -1,4 +1,4 @@
-module CssStatesTest exposing (..)
+module DynamicCssTest exposing (..)
 
 import Test exposing (..)
 import Expect
@@ -8,8 +8,8 @@ import CssStates exposing (..)
 
 all : Test
 all =
-    describe "CSS States"
-        [ describe "Priority Coloring"
+    describe "Dynamic CSS"
+        [ describe "Priority Styles"
             [ describe "Known States"
                 [ test "Creates map between known states and css class" <|
                     \() ->

@@ -1,11 +1,11 @@
-module StoriesTest exposing (..)
+module Story.ViewTest exposing (..)
 
 import Test exposing (..)
 import Expect
 import Html exposing (Html, Attribute, section, text, div, h1, h2, h3, p, small, ul, li)
 import Html.Attributes exposing (..)
-import Definitions exposing (Story)
-import Stories exposing (..)
+import Story.Model exposing (Story)
+import Story.View exposing (storyViewOf, toGroupView)
 
 
 all : Test
@@ -14,18 +14,17 @@ all =
         [ describe "HTML Creation"
             [ test "for one story" <|
                 let
-                    story : Story
                     story =
                         { narrative = "Some good description"
                         , feature = "Feat"
-                        , priority = "some"
+                        , priority = "Must Have"
                         , category = "blah"
                         }
                 in
                     \() ->
-                        Expect.equal (toStoryViewOf story)
+                        Expect.equal (storyViewOf story)
                             (li
-                                [ class "card card-story" ]
+                                [ class "card card-story must-have" ]
                                 [ h3 [ class "card-narrative" ] [ text "Some good description" ]
                                 , small [ class "card-feature" ] [ text "Feat" ]
                                 ]

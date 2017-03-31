@@ -1,19 +1,18 @@
 module Base exposing (..)
 
-import Http
-import Definitions exposing (Story)
+import Story.Model exposing (Story)
 
 
 type alias Model =
     { stories : List Story
-    , selectedGrouping : Maybe String
+    , selectedGroup : Maybe String
     , selectedPriority : Maybe String
     }
 
 
 model : Model
 model =
-    { selectedGrouping = Nothing
+    { selectedGroup = Nothing
     , selectedPriority = Nothing
     , stories =
         [ { category = "Cat 1"
@@ -33,11 +32,3 @@ model =
           }
         ]
     }
-
-
-type Msg
-    = FetchStories
-    | StoriesLoaded (Result Http.Error (List Story))
-    | SelectGrouping String
-    | ShowAll
-    | SelectPriority String

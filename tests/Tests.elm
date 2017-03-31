@@ -1,18 +1,14 @@
 module Tests exposing (..)
 
 import Test exposing (..)
-import Expect
-import Fuzz exposing (list, int, tuple, string)
-import String
-import StoriesTest
-import CssStatesTest
-import StoryGroupingTest
+import Story.ModelTest
+import Story.ViewTest
+import DynamicCssTest
 
 
 all : Test
 all =
     describe "my-stories"
-        [ StoriesTest.all
-        , StoryGroupingTest.all
-        , CssStatesTest.all
+        [ Story.ModelTest.all
+        , DynamicCssTest.all
         ]

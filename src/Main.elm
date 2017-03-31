@@ -5,11 +5,14 @@ import Html.Attributes exposing (..)
 import Html.Events exposing (onClick)
 import Dict exposing (Dict)
 import Dict.Extra exposing (groupBy)
-import StoryGrouping exposing (..)
-import Definitions exposing (Story)
-import Stories exposing (..)
-import CssStates exposing (..)
+import Http exposing (get, send)
 import Base exposing (..)
+import Story.Model exposing (Story, groupedBy)
+import Story.View exposing (toGroupView)
+import Story.Msg exposing (..)
+import Story.Decoder exposing (storyDecoder)
+import Strings exposing (asKebab)
+import DynamicCss exposing (cssClassFor)
 
 
 main =
@@ -23,9 +26,18 @@ main =
 
 init : List Story -> ( Model, Cmd Msg )
 init initialStories =
-    ( { stories = [], selectedGrouping = Nothing, selectedPriority = Nothing }
+    ( { stories = [], selectedGroup = Nothing, selectedPriority = Nothing }
     , fetchStories
     )
+
+
+fetchStories : Cmd Msg
+fetchStories =
+    let
+        url =
+            "http://localhost:8000/my-stories-a7fde-export.json"
+    in
+        Http.send StoriesLoaded (Http.get url storyDecoder)
 
 
 update : Msg -> Model -> ( Model, Cmd Msg )
@@ -40,11 +52,11 @@ update msg model =
         StoriesLoaded (Err _) ->
             ( model, Cmd.none )
 
-        SelectGrouping groupingName ->
-            ( { model | selectedGrouping = Just groupingName }, Cmd.none )
+        SelectGroup groupingName ->
+            ( { model | selectedGroup = Just groupingName }, Cmd.none )
 
         ShowAll ->
-            ( { model | selectedGrouping = Nothing, selectedPriority = Nothing }, Cmd.none )
+            ( { model | selectedGroup = Nothing, selectedPriority = Nothing }, Cmd.none )
 
         SelectPriority priority ->
             let
@@ -61,7 +73,11 @@ view : Model -> Html Msg
 view model =
     section []
         [ ul [ class "fixed-info cards" ] (prioritiesIn model.stories)
-        , div [] (viewBy "feature" model)
+        , div [] <|
+            ((groupedBy "feature" model.stories model.selectedGroup model.selectedPriority)
+                |> Dict.map toGroupView
+                |> Dict.values
+            )
         , footer []
             [ button [ onClick ShowAll ] [ text "clear selection" ]
             ]
