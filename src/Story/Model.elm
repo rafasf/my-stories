@@ -1,4 +1,4 @@
-module Story.Model exposing (Story, groupedBy, withPriority)
+module Story.Model exposing (Story, groupedBy, withPriority, withSelectedGroup)
 
 import Dict
 import Dict.Extra exposing (groupBy)
@@ -17,8 +17,8 @@ groupedBy : String -> List Story -> Maybe String -> Maybe String -> Dict.Dict St
 groupedBy property stories selectedGroup selectedPriority =
     stories
         |> withPriority selectedPriority
+        |> withSelectedGroup selectedGroup
         |> groupBy .feature
-        |> Dict.filter (withSelectedGroup selectedGroup)
 
 
 withPriority : Maybe String -> List Story -> List Story
@@ -35,11 +35,15 @@ withPriority possiblePriority stories =
         stories
 
 
-withSelectedGroup : Maybe String -> String -> List Story -> Bool
-withSelectedGroup possibleSelectedGroup groupName stories =
-    case possibleSelectedGroup of
-        Just selectedGroup ->
-            (asKebab groupName == selectedGroup)
+withSelectedGroup : Maybe String -> List Story -> List Story
+withSelectedGroup possibleSelectedGroup stories =
+    List.filter
+        (\story ->
+            case possibleSelectedGroup of
+                Just selectedGroup ->
+                    (selectedGroup == (asKebab story.feature))
 
-        Nothing ->
-            True
+                Nothing ->
+                    True
+        )
+        stories

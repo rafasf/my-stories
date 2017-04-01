@@ -43,6 +43,15 @@ all =
                       , priority = "must-have"
                       }
                     ]
+        , test "returns stories matching desired feature" <|
+            \() ->
+                Expect.equal (withSelectedGroup (Just "f4") stories)
+                    [ { narrative = "n4"
+                      , feature = "f4"
+                      , category = "c4"
+                      , priority = "should-have"
+                      }
+                    ]
         , test "shows only desired stories groups by feature" <|
             \() ->
                 Expect.equal (groupedBy "property" stories (Just "f4") (Just "should-have"))
