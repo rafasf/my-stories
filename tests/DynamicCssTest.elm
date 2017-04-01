@@ -3,7 +3,7 @@ module DynamicCssTest exposing (..)
 import Test exposing (..)
 import Expect
 import Dict exposing (Dict)
-import CssStates exposing (..)
+import DynamicCss exposing (..)
 
 
 all : Test
