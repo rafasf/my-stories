@@ -1,3 +1,11 @@
+html {
+  box-sizing: border-box;
+}
+
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+
 html, body {
   font-family: "Open Sans";
   color: #111;
@@ -19,12 +27,12 @@ ul, li {
   z-index: 1;
   background-color: #fff;
   justify-content: flex-end;
+  opacity: .7;
 }
 
 .cards {
   display: flex;
   flex-flow: row wrap;
-  justify-content: right;
 }
 
 .card {
@@ -37,7 +45,11 @@ ul, li {
 
 .card-story {
   width: 380px;
-  height: 100px;
+  height: 120px;
+}
+
+.card-narrative {
+  font-weight: normal;
 }
 
 .card-feature {
@@ -50,6 +62,10 @@ ul, li {
 
   bottom: 3px;
   right: 3px;
+}
+
+.feature-name, .priority {
+  cursor: pointer;
 }
 
 .must-have {
