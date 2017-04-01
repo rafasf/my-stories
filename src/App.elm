@@ -1,4 +1,4 @@
-module Main exposing (..)
+module App exposing (..)
 
 import Html exposing (Html, Attribute, footer, button, div, section, ul, li, text)
 import Html.Attributes exposing (..)
@@ -53,7 +53,14 @@ update msg model =
             ( model, Cmd.none )
 
         SelectGroup groupingName ->
-            ( { model | selectedGroup = Just groupingName }, Cmd.none )
+            let
+                newGroup =
+                    if Just groupingName == model.selectedGroup then
+                        Nothing
+                    else
+                        Just groupingName
+            in
+                ( { model | selectedGroup = newGroup }, Cmd.none )
 
         ShowAll ->
             ( { model | selectedGroup = Nothing, selectedPriority = Nothing }, Cmd.none )
