@@ -5,7 +5,7 @@ import Expect
 import Html exposing (Html, Attribute, section, text, div, h1, h2, h3, p, small, ul, li)
 import Html.Attributes exposing (..)
 import Story.Model exposing (Story)
-import Story.View exposing (storyViewOf, toGroupView)
+import Story.View exposing (..)
 
 
 all : Test
@@ -29,5 +29,13 @@ all =
                                 , small [ class "card-feature" ] [ text "Feat" ]
                                 ]
                             )
+            , test "priority list" <|
+                \() ->
+                    Expect.equal
+                        (priorityViewOf "Must Have" 3)
+                        (li
+                            [ class "priority card must-have" ]
+                            [ text "Must Have (3)" ]
+                        )
             ]
         ]

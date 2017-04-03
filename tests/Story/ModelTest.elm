@@ -29,7 +29,7 @@ stories =
 all : Test
 all =
     describe "Story"
-        [ test "shows only stories with given priority" <|
+        [ test "returns only stories with given priority" <|
             \() ->
                 Expect.equal (withPriority (Just "must-have") stories)
                     [ { narrative = "n1"
@@ -52,7 +52,7 @@ all =
                       , priority = "should-have"
                       }
                     ]
-        , test "shows only desired stories groups by feature" <|
+        , test "returns only desired stories groups by feature" <|
             \() ->
                 Expect.equal (groupedBy "property" stories (Just "f4") (Just "should-have"))
                     (Dict.fromList
@@ -64,6 +64,14 @@ all =
                               }
                             ]
                           )
+                        ]
+                    )
+        , test "returns priorites with number of stories in it" <|
+            \() ->
+                Expect.equal (prioritiesIn stories)
+                    (Dict.fromList
+                        [ ( "must-have", 2 )
+                        , ( "should-have", 1 )
                         ]
                     )
         ]

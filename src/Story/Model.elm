@@ -1,6 +1,6 @@
-module Story.Model exposing (Story, groupedBy, withPriority, withSelectedGroup)
+module Story.Model exposing (..)
 
-import Dict
+import Dict exposing (Dict)
 import Dict.Extra exposing (groupBy)
 import Strings exposing (asKebab)
 
@@ -33,6 +33,13 @@ withPriority possiblePriority stories =
                     True
         )
         stories
+
+
+prioritiesIn : List Story -> Dict String Int
+prioritiesIn stories =
+    stories
+        |> groupBy .priority
+        |> Dict.map (\_ stories -> List.length stories)
 
 
 withSelectedGroup : Maybe String -> List Story -> List Story

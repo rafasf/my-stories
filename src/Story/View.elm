@@ -3,6 +3,7 @@ module Story.View exposing (..)
 import Html exposing (Html, h2, h3, li, section, small, ul, text)
 import Html.Attributes exposing (class)
 import Html.Events exposing (onClick)
+import Dict exposing (Dict)
 import Story.Model exposing (Story)
 import Story.Msg exposing (..)
 import DynamicCss exposing (cssClassFor)
@@ -32,3 +33,12 @@ toGroupView groupingField stories =
                 [ text title ]
             , ul [ class "cards" ] <| List.map storyViewOf stories
             ]
+
+
+priorityViewOf : String -> Int -> Html Msg
+priorityViewOf priority numberOfStories =
+    li
+        [ class ("priority card " ++ (cssClassFor priority))
+        , onClick (SelectPriority (asKebab priority))
+        ]
+        [ text (priority ++ " (" ++ (toString numberOfStories) ++ ")") ]

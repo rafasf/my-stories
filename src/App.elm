@@ -7,8 +7,8 @@ import Dict exposing (Dict)
 import Dict.Extra exposing (groupBy)
 import Http exposing (get, send)
 import Base exposing (..)
-import Story.Model exposing (Story, groupedBy)
-import Story.View exposing (toGroupView)
+import Story.Model exposing (Story, groupedBy, prioritiesIn)
+import Story.View exposing (toGroupView, priorityViewOf)
 import Story.Msg exposing (..)
 import Story.Decoder exposing (storyDecoder)
 import Strings exposing (asKebab)
@@ -79,7 +79,11 @@ update msg model =
 view : Model -> Html Msg
 view model =
     section []
-        [ ul [ class "fixed-info cards" ] (prioritiesIn model.stories)
+        [ ul [ class "fixed-info cards" ]
+            ((prioritiesIn model.stories)
+                |> Dict.map (\p ns -> priorityViewOf p ns)
+                |> Dict.values
+            )
         , div [] <|
             ((groupedBy "feature" model.stories model.selectedGroup model.selectedPriority)
                 |> Dict.map toGroupView
@@ -94,21 +98,3 @@ view model =
 subscriptions : Model -> Sub Msg
 subscriptions model =
     Sub.none
-
-
-prioritiesIn : List Story -> List (Html Msg)
-prioritiesIn stories =
-    groupBy .priority stories
-        |> Dict.map
-            (\priority stories ->
-                let
-                    numberOfStories =
-                        " (" ++ (toString (List.length stories)) ++ ")"
-                in
-                    li
-                        [ class ("priority card " ++ (cssClassFor priority))
-                        , onClick (SelectPriority (asKebab priority))
-                        ]
-                        [ text (priority ++ numberOfStories) ]
-            )
-        |> Dict.values
