@@ -9,4 +9,3 @@ type Msg
     | StoriesLoaded (Result Http.Error (List Story))
     | SelectGroup String
     | SelectPriority String
-    | ShowAll

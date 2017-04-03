@@ -51,16 +51,4 @@ all =
                             |> .selectedPriority
                             |> Expect.equal Nothing
             ]
-        , describe "Show All"
-            [ test "removes all selections" <|
-                let
-                    { selectedGroup, selectedPriority } =
-                        model
-                            |> update ShowAll
-                            |> Tuple.first
-                in
-                    \() ->
-                        Expect.equal ( selectedGroup, selectedPriority )
-                            ( Nothing, Nothing )
-            ]
         ]

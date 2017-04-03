@@ -1,6 +1,6 @@
 module App exposing (..)
 
-import Html exposing (Html, Attribute, footer, button, div, section, ul, li, text)
+import Html exposing (Html, Attribute, button, div, section, ul, li, text)
 import Html.Attributes exposing (..)
 import Html.Events exposing (onClick)
 import Dict exposing (Dict)
@@ -62,9 +62,6 @@ update msg model =
             in
                 ( { model | selectedGroup = newGroup }, Cmd.none )
 
-        ShowAll ->
-            ( { model | selectedGroup = Nothing, selectedPriority = Nothing }, Cmd.none )
-
         SelectPriority priority ->
             let
                 newPriority =
@@ -97,9 +94,6 @@ view model =
     section []
         [ priorityList model
         , storyList model
-        , footer []
-            [ button [ onClick ShowAll ] [ text "clear selection" ]
-            ]
         ]
 
 
