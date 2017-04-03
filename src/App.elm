@@ -76,19 +76,23 @@ update msg model =
                 ( { model | selectedPriority = newPriority }, Cmd.none )
 
 
+priorityList : Model -> Html Msg
+priorityList model =
+    prioritiesIn model.stories
+        |> Dict.map (\p ns -> priorityViewOf p ns)
+        |> Dict.values
+        |> ul [ class "fixed-info cards" ]
+
+
 view : Model -> Html Msg
 view model =
     section []
-        [ ul [ class "fixed-info cards" ]
-            ((prioritiesIn model.stories)
-                |> Dict.map (\p ns -> priorityViewOf p ns)
-                |> Dict.values
-            )
         , div [] <|
             ((groupedBy "feature" model.stories model.selectedGroup model.selectedPriority)
                 |> Dict.map toGroupView
                 |> Dict.values
             )
+        [ priorityList model
         , footer []
             [ button [ onClick ShowAll ] [ text "clear selection" ]
             ]
