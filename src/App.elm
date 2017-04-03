@@ -84,15 +84,19 @@ priorityList model =
         |> ul [ class "fixed-info cards" ]
 
 
+storyList : Model -> Html Msg
+storyList model =
+    groupedBy "feature" model.stories model.selectedGroup model.selectedPriority
+        |> Dict.map toGroupView
+        |> Dict.values
+        |> section [ class "features" ]
+
+
 view : Model -> Html Msg
 view model =
     section []
-        , div [] <|
-            ((groupedBy "feature" model.stories model.selectedGroup model.selectedPriority)
-                |> Dict.map toGroupView
-                |> Dict.values
-            )
         [ priorityList model
+        , storyList model
         , footer []
             [ button [ onClick ShowAll ] [ text "clear selection" ]
             ]
