@@ -30,6 +30,11 @@ ul, li {
   opacity: .7;
 }
 
+.card.summary {
+  background-color: #fff;
+  border: none;
+}
+
 .cards {
   display: flex;
   flex-flow: row wrap;

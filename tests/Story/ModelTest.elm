@@ -74,4 +74,7 @@ all =
                         , ( "should-have", 1 )
                         ]
                     )
+        , test "creates summary" <|
+            \() ->
+                Expect.equal (summaryFor stories) (StoriesSummary 3 2)
         ]

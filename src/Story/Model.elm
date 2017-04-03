@@ -13,6 +13,12 @@ type alias Story =
     }
 
 
+type alias StoriesSummary =
+    { numberOfStories : Int
+    , numberOfFeatures : Int
+    }
+
+
 groupedBy : String -> List Story -> Maybe String -> Maybe String -> Dict.Dict String (List Story)
 groupedBy property stories selectedGroup selectedPriority =
     stories
@@ -54,3 +60,17 @@ withSelectedGroup possibleSelectedGroup stories =
                     True
         )
         stories
+
+
+summaryFor : List Story -> StoriesSummary
+summaryFor stories =
+    let
+        numberOfStories =
+            List.length stories
+
+        numberOfFeatures =
+            groupBy .feature stories
+                |> Dict.keys
+                |> List.length
+    in
+        StoriesSummary numberOfStories numberOfFeatures

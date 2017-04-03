@@ -1,10 +1,10 @@
 module Story.View exposing (..)
 
-import Html exposing (Html, h2, h3, li, section, small, ul, text)
+import Html exposing (Html, h2, h3, li, section, small, span, ul, text)
 import Html.Attributes exposing (class)
 import Html.Events exposing (onClick)
 import Dict exposing (Dict)
-import Story.Model exposing (Story)
+import Story.Model exposing (Story, StoriesSummary)
 import Story.Msg exposing (..)
 import DynamicCss exposing (cssClassFor)
 import Strings exposing (asKebab)
@@ -42,3 +42,20 @@ priorityViewOf priority numberOfStories =
         , onClick (SelectPriority (asKebab priority))
         ]
         [ text (priority ++ " (" ++ (toString numberOfStories) ++ ")") ]
+
+
+summaryViewOf : StoriesSummary -> Html Msg
+summaryViewOf summary =
+    let
+        projectName =
+            "Summary"
+
+        summaryText =
+            " (Stories: "
+                ++ (toString summary.numberOfStories)
+                ++ ", Features: "
+                ++ (toString summary.numberOfFeatures)
+                ++ ")"
+    in
+        li [ class "card summary" ]
+            [ text (projectName ++ summaryText) ]

@@ -7,8 +7,8 @@ import Dict exposing (Dict)
 import Dict.Extra exposing (groupBy)
 import Http exposing (get, send)
 import Base exposing (..)
-import Story.Model exposing (Story, groupedBy, prioritiesIn)
-import Story.View exposing (toGroupView, priorityViewOf)
+import Story.Model exposing (Story, groupedBy, prioritiesIn, summaryFor)
+import Story.View exposing (toGroupView, priorityViewOf, summaryViewOf)
 import Story.Msg exposing (..)
 import Story.Decoder exposing (storyDecoder)
 import Strings exposing (asKebab)
@@ -76,8 +76,9 @@ update msg model =
 priorityList : Model -> Html Msg
 priorityList model =
     prioritiesIn model.stories
-        |> Dict.map (\p ns -> priorityViewOf p ns)
+        |> Dict.map (\priority numberOfStories -> priorityViewOf priority numberOfStories)
         |> Dict.values
+        |> (\priorities -> [ (summaryViewOf (summaryFor model.stories)) ] ++ priorities)
         |> ul [ class "fixed-info cards" ]
 
 
