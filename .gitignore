@@ -94,4 +94,9 @@ pom.xml.asc
 /.lein-*
 /.nrepl-port
 
+### project ###
+my-stories-a7fde-export.json
+app.js
+styles.css
+
 # End of https://www.gitignore.io/api/vim,elm,node
