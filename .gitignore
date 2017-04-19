@@ -82,4 +82,16 @@ Session.vim
 # auto-generated tag files
 tags
 
+### lein ###
+target
+lib
+classes
+checkouts
+pom.xml
+pom.xml.asc
+*.jar
+*.class
+/.lein-*
+/.nrepl-port
+
 # End of https://www.gitignore.io/api/vim,elm,node
