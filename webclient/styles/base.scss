@@ -1,0 +1,20 @@
+//@include box-sizing($bs)
+
+$main_font: Open Sans, sans-serif;
+
+html, body, input, select {
+  font-family: $main_font;
+  color: $black;
+}
+
+ul, li {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+h1, h2, h3 {
+  padding: 0;
+  margin: 0;
+}
+

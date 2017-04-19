@@ -8,3 +8,6 @@ client:
 
 server: client
 	cd $(SERVER) && lein uberjar
+
+run:
+	cd $(SERVER) && lein ring server

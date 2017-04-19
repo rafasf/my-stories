@@ -1,0 +1,82 @@
+@import "./colours";
+@import "./base";
+
+$unknown_category: $yellow;
+$must: $green_light;
+$should: $orange_light;
+$could: $blue_light;
+$nice: $gray_light;
+
+.fixed-info {
+  width: 100%;
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  background-color: $white;
+  justify-content: flex-end;
+  opacity: .7;
+}
+
+.card {
+  position: relative;
+  background-color: $unknown_category;
+  border: 1px solid darken($unknown_category, 50%);
+  padding: 10px;
+  margin: 5px;
+
+  &.summary {
+    background-color: $white;
+    border: none;
+  }
+}
+
+.cards {
+  display: flex;
+  flex-flow: row wrap;
+}
+
+.card-story {
+  width: 380px;
+  height: 120px;
+}
+
+.card-narrative {
+  font-weight: normal;
+}
+
+.card-feature {
+  position: absolute;
+  display: block;
+  text-transform: uppercase;
+  color: $gray;
+  bottom: 3px;
+  right: 3px;
+}
+
+.feature-name {
+  cursor: pointer;
+}
+
+.priority {
+  cursor: pointer;
+}
+
+.must-have {
+  background-color: $must;
+  border: 1px solid darken($must, 50%);
+}
+
+.could-have {
+  background-color: $could;
+  border: 1px solid darken($could, 50%);
+}
+
+.nice-to-have {
+  background-color: $nice;
+  border: 1px solid darken($nice, 50%);
+}
+
+.should-have {
+  background-color: $should;
+  border: 1px solid darken($should, 50%);
+}
