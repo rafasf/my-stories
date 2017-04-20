@@ -61,22 +61,27 @@ $nice: $gray_light;
   cursor: pointer;
 }
 
+@mixin priority-card($colour) {
+  background-color: $colour;
+  border: 1px solid darken($colour, 50%);
+
+  &:hover {
+    background-color: darken($colour, 8%);
+  }
+}
+
 .must-have {
-  background-color: $must;
-  border: 1px solid darken($must, 50%);
+  @include priority-card($must);
 }
 
 .could-have {
-  background-color: $could;
-  border: 1px solid darken($could, 50%);
+  @include priority-card($could);
 }
 
 .nice-to-have {
-  background-color: $nice;
-  border: 1px solid darken($nice, 50%);
+  @include priority-card($nice);
 }
 
 .should-have {
-  background-color: $should;
-  border: 1px solid darken($should, 50%);
+  @include priority-card($should);
 }
