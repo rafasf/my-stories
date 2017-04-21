@@ -1,6 +1,12 @@
 box: clojure:latest
 
-build:
+changes:
+  steps:
+    - script:
+      name: new-things-found
+      code: echo "starting..."
+
+webclient-build:
   steps:
     - script:
       name: install-nodejs
@@ -13,6 +19,9 @@ build:
       code: |
         cd webclient && make test
 
+
+api-build:
+  steps:
     - script:
       name: test-app
       code: |
