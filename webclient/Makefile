@@ -1,10 +1,11 @@
-NM=node_modules/.bin
+NM=`pwd`/node_modules/.bin
 
 build: test css
 	$(NM)/elm-make src/App.elm --output=../$(RESOURCES)/app.js
 
 test: install
-	$(NM)/elm-test
+	$(NM)/elm-test --compiler $(NM)/elm-make
+
 
 css: install
 	$(NM)/node-sass \
