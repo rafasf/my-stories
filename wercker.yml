@@ -1,12 +1,6 @@
 box: clojure:latest
 
-changes:
-  steps:
-    - script:
-      name: new-things-found
-      code: echo "starting..."
-
-webclient-build:
+build:
   steps:
     - script:
       name: install-nodejs
@@ -19,20 +13,11 @@ webclient-build:
       code: |
         cd webclient && make test
 
-
-api-build:
-  steps:
     - script:
       name: test-app
       code: |
         cd my-stories && lein test
 
-assemble:
-  steps:
     - script:
-      name: create-jar
+      name: assemble
       code: make server
-
-    - script:
-      name: create-image
-      code: echo "docker build . :)"
