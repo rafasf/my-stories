@@ -7,7 +7,10 @@ client:
 	$(MAKE) -C $(CLIENT) build
 
 server: client
-	cd $(SERVER) && lein uberjar
+	cd $(SERVER) && lein ring uberjar
+
+only-assemble:
+	cd $(SERVER) && lein ring uberjar
 
 run:
 	cd $(SERVER) && lein ring server
