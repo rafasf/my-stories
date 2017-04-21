@@ -1,4 +1,4 @@
-(ns my-stories-be.handler
+(ns my-stories.handler
   (:require [compojure.core :refer :all]
             [compojure.route :as route]
             [compojure.handler :as handler]
