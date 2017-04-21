@@ -1,27 +1,29 @@
-box: clojure:alpine
+box: clojure:latest
 
-app-build:
-  steps:
-    - script:
-      name: test-app
-      code: |
-        cd my-stories && lein test
-
-
-webclient-build:
+build:
   steps:
     - script:
       name: install-nodejs
-      code: apk add --update --no-cache make gcc g++ python nodejs
+      code: |
+        apt-get update
+        apt-get install -y make gcc g++ python nodejs
 
     - script:
       name: test-client
       code: |
         cd webclient && make test
 
+    - script:
+      name: test-app
+      code: |
+        cd my-stories && lein test
 
 assemble:
   steps:
     - script:
       name: create-jar
       code: make server
+
+    - script:
+      name: create-image
+      code: echo "docker build . :)"
