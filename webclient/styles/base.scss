@@ -1,6 +1,8 @@
-//@include box-sizing($bs)
-
 $main_font: Open Sans, sans-serif;
+
+*, *:before, *:after {
+  box-sizing: border-box;
+}
 
 html, body, input, select {
   font-family: $main_font;
