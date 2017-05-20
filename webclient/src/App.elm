@@ -35,7 +35,7 @@ fetchStories : Cmd Msg
 fetchStories =
     let
         url =
-            "http://localhost:3000/api/stories"
+            "http://localhost:3000/api/stories/c7Nr13g"
     in
         Http.send StoriesLoaded (Http.get url storyDecoder)
 

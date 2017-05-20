@@ -12,10 +12,11 @@
   (route/not-found "Not Found"))
 
 (defroutes api-routes
-  (context "/api" []
-           (GET "/stories" request
+  (context "/api/stories" []
+           (GET "/:project" request
                 {:body (slurp (io/resource "public/my-stories-a7fde-export.json"))})
-           ))
+           (POST "/" request
+                 {:body {:message "ok" :project "NewPr0j"}})))
 
 (def api
   (-> (handler/api api-routes)
