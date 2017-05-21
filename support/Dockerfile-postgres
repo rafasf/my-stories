@@ -1,0 +1,7 @@
+# vim: ft=dockerfile
+
+FROM postgres:9.6.3-alpine
+
+ENV POSTGRES_USER app
+
+ADD init.sql /docker-entrypoint-initdb.d/

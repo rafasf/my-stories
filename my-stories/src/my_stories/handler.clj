@@ -4,7 +4,12 @@
             [compojure.handler :as handler]
             [clojure.java.io :as io]
             [ring.middleware.json :refer [wrap-json-response wrap-json-body]]
-            [ring.middleware.defaults :refer [wrap-defaults site-defaults]]))
+            [ring.middleware.defaults :refer [wrap-defaults site-defaults]]
+            [my-stories.stories :as stories]
+            [environ.core :refer [env]]))
+
+(def db (env :database-url))
+(def only-proj "newpr0j")
 
 (defroutes app-routes
   (GET "/" [] (slurp (io/resource "public/index.html")))
@@ -13,10 +18,11 @@
 
 (defroutes api-routes
   (context "/api/stories" []
-           (GET "/:project" request
-                {:body (slurp (io/resource "public/my-stories-a7fde-export.json"))})
            (POST "/" request
-                 {:body {:message "ok" :project "NewPr0j"}})))
+                 {:body {:message "ok" :project only-proj}})
+           (GET "/:project" request
+                {:body {:stories
+                        (stories/all-stories-for db {:projectId only-proj})}})))
 
 (def api
   (-> (handler/api api-routes)
